@@ -1,11 +1,11 @@
-// Jenkinsfile template for Unity 2018.2.17f1 (no Build Profiles).
+// Jenkinsfile template for Unity 2018.2.21f1 (no Build Profiles).
 // Builds the scenes enabled in File > Build Settings for each TARGET with
 // Assets/Editor/CommandLineBuild.cs. See "Configuring a Legacy Unity Build Pipeline.docx".
 //
 // Unity 2018.2 notes:
 // - Linux64 builds with Mono only (Linux IL2CPP starts in 2019.3). Win64 IL2CPP only
 //   builds on a Windows machine, so on the Linux agent the editor script uses Mono.
-// - Agent image modules (UNITY_INSTALLS): 2018.2.17f1:88933597c842:windows-mono,webgl
+// - Agent image modules (UNITY_INSTALLS): 2018.2.21f1:a122f5dc316d:windows-mono,webgl
 def buildDir(String target, String buildType) {
   def projectPrefix = (env.PROJECT_DIR == '.') ? '' : "${env.PROJECT_DIR}/"
   return "${projectPrefix}Builds/${target}/${buildType}"
@@ -95,7 +95,7 @@ pipeline {
                       DEV_FLAG=""
                       if [ "$BUILD_TYPE" = "Development" ]; then DEV_FLAG="-devBuild"; fi
                       xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' dbus-launch \
-                      ~/Unity/Hub/Editor/2018.2.17f1/Editor/Unity \
+                      ~/Unity/Hub/Editor/2018.2.21f1/Editor/Unity \
                       -username "$UNITY_USER" \
                       -password "$UNITY_PASSWORD" \
                       -serial "$UNITY_LICENSE_SERIAL" \
