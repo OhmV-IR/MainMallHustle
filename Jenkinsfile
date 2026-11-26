@@ -66,6 +66,9 @@ pipeline {
               stage("Checkout") {
                 steps {
                   checkout scm
+                  // The repo stores textures/audio/models in Git LFS; a plain checkout
+                  // leaves pointer files, which Unity can't import.
+                  sh 'git lfs install --local && git lfs pull'
                 }
               }
               stage("Build") {
